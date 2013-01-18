@@ -61,7 +61,7 @@
     <div style="margin-bottom: 10px;" class="text-align-right">
         @Model.Dsm
     </div>
-    @using (Ajax.BeginForm(new AjaxOptions { OnComplete = "closePopUp()" })) {
+    @using (Ajax.BeginForm(new AjaxOptions { OnComplete = "closePopUp();location.reload(true);" })) {
         <div style="width: 100%">
             @Html.HiddenFor(x => x.DsmId)
             <div>
@@ -83,7 +83,7 @@
             </select>
             </div>
             <div>
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary"  />
             </div>
         </div>
     }
