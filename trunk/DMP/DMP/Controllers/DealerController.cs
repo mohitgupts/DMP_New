@@ -252,7 +252,8 @@ namespace DMP.Controllers
             var competencies = competencyProfileMapService.FindCompetencyProfileMaps(x => x.DealerManpowerId == manpower.Id);
             var model = new CompetencyProfileViewModel
             {
-                Competencies = competencies.Any() ? competencyProfileMapService.FindCompetencyProfileMaps(x => x.DealerManpowerId == id).Select(x => new CompetencyProfileModel { Id = x.Id, Competency = x.Competency.Name, ComptencyId = x.CompetencyId, Score = x.Score }) : masterService.FindCompetencies(x => x.Designation.ToLower() == manpower.Type.ToLower()).Select(x => new CompetencyProfileModel { Id = 0, Competency = x.Name, ComptencyId = x.Id, Score = 0 }),
+                Competencies = competencies.Any() ?competencies.Select(x => new CompetencyProfileModel { Id = x.Id, Competency = x.Competency.Name, ComptencyId = x.CompetencyId, Score = x.Score }) : masterService.FindCompetencies(x => x.Designation.ToLower() == manpower.Type.ToLower()).Select(x => new CompetencyProfileModel { Id = 0, Competency = x.Name, ComptencyId = x.Id, Score = 0 }),
+                                                   
                 ProfileId = id
             };
             return PartialView("CompetencyPartial", model);
