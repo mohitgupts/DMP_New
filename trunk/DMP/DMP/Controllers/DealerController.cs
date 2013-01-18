@@ -576,25 +576,20 @@ namespace DMP.Controllers
             var dsm = dealerManpowerService.GetDealerManpower(id);
             var csm = userService.GetUserByUserName(User.Identity.Name);
             var currentDate = DateTime.Now;
-            var dseList = dealerManpowerService.FindDealerManpowers(x =>x.DealerId==dealerId && x.UserId == csm.Id && x.Type.ToLower() == "dse");
+            var dseList = dealerManpowerService.FindDealerManpowers(x =>x.DealerId==dealerId && x.UserId == csm.Id && x.Type.ToLower() == "dse").ToList();
             var currentMonth = masterService.FindAndCreateMonth(currentDate.ToString("MMMM"), currentDate.Year);
             var maps = dsmDseTargetMapService.FindDsmDseTargetMaps(x => x.MonthId == currentMonth.Id && x.UserId == csm.Id).ToList();
-            var list = new List<KeyValuePair<int, string>>();
-            if (maps.Any())
-            {
+            var list = new List<KeyValuePair<KeyValuePair<int, bool>, string>>();
+            if (maps.Any()) {
                 var dseIds = maps.Where(x => x.DsmId == id).Select(x => x.DseId);
-                if (dseIds.Any())
-                {
+                if (dseIds.Any()) {
                     list.AddRange(dseList.Where(x => dseIds.Contains(x.Id)).Select(x => new KeyValuePair<KeyValuePair<int, bool>, string>(new KeyValuePair<int, bool>(x.Id, true), x.Name)));
                 }
-                list.AddRange(dseList.Where(x => !maps.Select(y => y.DseId).Contains(x.Id)).Select(x => new KeyValuePair<int, string>(x.Id, x.Name)));
-            }
-            else
-            {
+                list.AddRange(dseList.Where(x => !maps.Select(y => y.DseId).Contains(x.Id)).Select(x => new KeyValuePair<KeyValuePair<int, bool>, string>(new KeyValuePair<int, bool>(x.Id, false), x.Name)));
+            } else {
                 list.AddRange(dseList.Select(x => new KeyValuePair<KeyValuePair<int, bool>, string>(new KeyValuePair<int, bool>(x.Id, false), x.Name)));
             }
-            var model = new DseDsmMapViewModel()
-            {
+            var model = new DseDsmMapViewModel() {
                 DsmId = id,
                 Dsm = dsm.Name,
                 DseList = list
