@@ -14,6 +14,8 @@ namespace DMP.Services.Interface {
 
         IEnumerable<DealerManpower> GetAllDealerManpowers();
 
-        IEnumerable<DealerManpower> FindDealerManpowers(Func<DealerManpower, bool> predicate);  
+        IEnumerable<DealerManpower> FindDealerManpowers(Func<DealerManpower, bool> predicate);
+        Month FindMonthById(int i);
+        ProductVarient FindProductById(int i);
     }
 }

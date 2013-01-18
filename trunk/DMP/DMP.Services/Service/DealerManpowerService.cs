@@ -8,9 +8,13 @@ namespace DMP.Services.Service {
     public class DealerManpowerService : IDealerManpowerService {
 
         private readonly IRepository<DealerManpower> manpowerRepo;
+        private readonly IRepository<Month> monthRepo;
+        private readonly IRepository<ProductVarient> productVariantRepo;
 
-        public DealerManpowerService(IRepository<DealerManpower> manpowerRepo) {
+        public DealerManpowerService(IRepository<DealerManpower> manpowerRepo, IRepository<Month> monthRepo, IRepository<ProductVarient> variantRepo) {
             this.manpowerRepo = manpowerRepo;
+            this.monthRepo = monthRepo;
+            productVariantRepo = variantRepo;
         }
 
         public DealerManpower GetDealerManpower(int id) {
@@ -49,6 +53,20 @@ namespace DMP.Services.Service {
             return manpowerRepo.Find(predicate).Where(x => x.ObjectInfo.DeletedDate == null);
         }
 
-        
+        public Month FindMonthById(int id) {
+            var month = monthRepo.Single(x => x.Id == id);
+            if (month != null) {
+                return month;
+            }
+            return null;
+        }
+
+        public ProductVarient FindProductById(int id) {
+            var variant = productVariantRepo.Single(x => x.Id == id);
+            if (variant != null) {
+                return variant;
+            }
+            return null;
+        }
     }
 }

@@ -4,42 +4,34 @@ using System.Linq;
 using DMP.Repository;
 using DMP.Services.Interface;
 
-namespace DMP.Services.Service
-{
-    public class TargetService : ITargetService
-    {
+namespace DMP.Services.Service {
+    public class TargetService : ITargetService {
 
         private readonly IRepository<Target> _targetRepo;
         private readonly IRepository<DsmDseTargetMap> _mapRepo;
 
-        public TargetService(IRepository<Target> targetRepo, IRepository<DsmDseTargetMap> mapRepo)
-        {
+        public TargetService(IRepository<Target> targetRepo, IRepository<DsmDseTargetMap> mapRepo) {
             _targetRepo = targetRepo;
             _mapRepo = mapRepo;
         }
 
-        public Target GetTarget(int id)
-        {
+        public Target GetTarget(int id) {
             return _targetRepo.Single(x => x.Id == id);
         }
 
-        public void AddTarget(IEnumerable<Target> targets)
-        {
-            foreach (var profile in targets)
-            {
+        public void AddTarget(IEnumerable<Target> targets) {
+            foreach (var profile in targets) {
                 _targetRepo.Add(profile);
             }
             _targetRepo.SaveChanges();
         }
 
-        public void AddTarget(Target target)
-        {
+        public void AddTarget(Target target) {
             _targetRepo.Add(target);
             _targetRepo.SaveChanges();
         }
 
-        public void UpdateTarget(Target target)
-        {
+        public void UpdateTarget(Target target) {
             var oldTarget = GetTarget(target.Id);
             oldTarget.DealerManpowerId = target.DealerManpowerId;
             oldTarget.Description = target.Description;
@@ -50,36 +42,40 @@ namespace DMP.Services.Service
             _targetRepo.SaveChanges();
         }
 
-        public void DeleteTarget(int id)
-        {
+        public void DeleteTarget(int id) {
             var target = GetTarget(id);
             _targetRepo.Delete(target);
             _targetRepo.SaveChanges();
         }
 
-        public IEnumerable<Target> GetAllTargets()
-        {
+        public IEnumerable<Target> GetAllTargets() {
             return _targetRepo.GetAll().Where(x => x.ObjectInfo.DeletedDate == null);
         }
 
-        public IEnumerable<Target> FindTargets(Func<Target, bool> predicate)
-        {
+        public IEnumerable<Target> FindTargets(Func<Target, bool> predicate) {
             return _targetRepo.Find(predicate).Where(x => x.ObjectInfo.DeletedDate == null);
         }
 
-        public void UpdateDsmTarget(int dsmId, int userId, int monthId)
-        {
+        public void UpdateDsmTarget(int dsmId, int userId, int monthId) {
             var dsmDseMap = _mapRepo.Find(x => x.DsmId == dsmId && x.UserId == userId && x.MonthId == monthId).ToList();
             var dseIds = dsmDseMap.Select(x => x.DseId);
+            if (!dseIds.Any()) {
+                var dsmTargets =
+                    _targetRepo.Find(
+                        x => x.MonthId == monthId && x.DealerManpowerId == dsmId);
+                foreach (var dsmTarget in dsmTargets) {
+                    dsmTarget.Actual = 0;
+                    dsmTarget.Target1 = 0;
+                    dsmTarget.Target2 = 0;
+                }
+            }
             var targets =
                 _targetRepo.Find(x => dseIds.Contains(x.DealerManpowerId) && x.MonthId == monthId).GroupBy(x => x.ProductVarientId);
-            foreach (var target in targets)
-            {
+            foreach (var target in targets) {
                 var dsmTarget =
                     _targetRepo.First(
-                        x => x.MonthId == monthId && x.ProductVarientId == target.Key && x.MonthId == monthId&&x.DealerManpowerId==dsmId);
-                if (dsmTarget == null)
-                {
+                        x => x.MonthId == monthId && x.ProductVarientId == target.Key && x.DealerManpowerId == dsmId);
+                if (dsmTarget == null) {
                     var dsmTarget1 = new Target();
                     dsmTarget1.MonthId = monthId;
                     dsmTarget1.ProductVarientId = target.Key;
@@ -88,9 +84,7 @@ namespace DMP.Services.Service
                     dsmTarget1.Target1 = target.Sum(x => x.Target1);
                     dsmTarget1.Target2 = target.Sum(x => x.Target2);
                     AddTarget(dsmTarget1);
-                }
-                else
-                {
+                } else {
                     dsmTarget.Actual = target.Sum(x => x.Actual);
                     dsmTarget.Target1 = target.Sum(x => x.Target1);
                     dsmTarget.Target2 = target.Sum(x => x.Target2);
@@ -101,6 +95,14 @@ namespace DMP.Services.Service
 
         }
 
-        
+        public IEnumerable<Target> FindTargets(int monthId = 0, int dealerManPowerId = 0, int productVarienId = 0) {
+            var targets =
+                _targetRepo.Find(
+                    x =>
+                    (monthId == 0 || x.MonthId == monthId) &&
+                    (dealerManPowerId == 0 || x.DealerManpowerId == dealerManPowerId) &&
+                    (productVarienId == 0 || x.ProductVarientId == productVarienId));
+            return targets.ToList();
+        }
     }
 }

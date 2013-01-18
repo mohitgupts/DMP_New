@@ -23,10 +23,20 @@ namespace DMP.ModelsView {
         public DealerManpowerModel Manpower { get; set; }
         public IEnumerable<TrainingProfileModel> Trainings { get; set; }
         public IEnumerable<string> Months { get; set; }
+        public IEnumerable<Target> ProductMonthsTagets { get; set; }
         public IEnumerable<string> Varients { get; set; }
     }
 
     public class ManageDseViewModel {
         public IEnumerable<DealerManpowerModel> Manpowers { get; set; }
     }
+
+    public class Target {
+        public int T1 { get; set; }
+        public int T2 { get; set; }
+        public int Actual { get; set; }
+        public string Month { get; set; }
+        public string ProductVariant { get; set; }
+    }
+
 }

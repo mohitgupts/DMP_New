@@ -256,11 +256,12 @@ namespace DMP.Models {
             };
         }
 
-        public static AttritionProfileMap ToDomainModel(AttritionProfileModel model) {
+        public static AttritionProfileMap ToDomainModel(AttritionProfileModel model,int dealerId) {
             return new AttritionProfileMap {
                 Id = model.Id,
                 AttritionId = model.AttritionId,
-                DateOfLeaving = model.DateOfLeaving
+                DateOfLeaving = model.DateOfLeaving,
+                DealerManpower =new DealerManpower{Id = dealerId}
             };
         }
     }

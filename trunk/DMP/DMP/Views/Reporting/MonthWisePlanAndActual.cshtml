@@ -1,6 +1,6 @@
 ﻿<script src="../../Assets/plugins/charts/js/highcharts.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         var chart = new Highcharts.Chart({
             chart: {
                 renderTo: 'dvReport',
@@ -13,7 +13,7 @@
                 text: 'ETB'
             },
             xAxis: {
-                categories: [
+              categories: @*[
                     'Jan',
                     'Feb',
                     'Mar',
@@ -26,7 +26,10 @@
                     'Oct',
                     'Nov',
                     'Dec'
-                ]
+                  
+                          ]*@
+                @Html.Raw(ViewBag.months)
+                
             },
             yAxis: {
                 min: 0,
@@ -58,15 +61,15 @@
             },
             series: [{
                 name: 'T1',
-                data: [10, 11, 12, 9, 8, 6, 4, 2, 9, 7, 5, 2]
+                data: @Html.Raw(ViewBag.t1)@*[10, 11, 12, 9, 8, 6, 4, 2, 9, 7, 5, 2]*@
 
             }, {
                 name: 'T2',
-                data: [1, 10, 2, 9, 3, 8, 4, 7, 5, 6, 6, 5]
+                data: @Html.Raw(ViewBag.t2)@*[1, 10, 2, 9, 3, 8, 4, 7, 5, 6, 6, 5]*@
 
             }, {
                 name: 'Actual',
-                data: [1, 10, 2, 9, 3, 8, 4, 7, 5, 6, 6, 5]
+                data: @Html.Raw(ViewBag.actuals)@*[1, 10, 2, 9, 3, 8, 4, 7, 5, 6, 6, 5]*@
 
             }]
         });

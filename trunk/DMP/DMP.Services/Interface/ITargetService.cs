@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using DMP.Repository;
 
-namespace DMP.Services.Interface
-{
-    public interface ITargetService
-    {
+namespace DMP.Services.Interface {
+    public interface ITargetService {
         Target GetTarget(int id);
 
         void AddTarget(IEnumerable<Target> targets);
@@ -20,5 +18,6 @@ namespace DMP.Services.Interface
 
         IEnumerable<Target> FindTargets(Func<Target, bool> predicate);
         void UpdateDsmTarget(int dsmId, int userId, int monthId);
-        }
+        IEnumerable<Target> FindTargets(int monthId = 0, int dealerManPowerId = 0, int productVarienId = 0);
+    }
 }

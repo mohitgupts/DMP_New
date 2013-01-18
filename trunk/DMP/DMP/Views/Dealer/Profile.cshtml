@@ -1,41 +1,41 @@
 ﻿@model DMP.ModelsView.ProfileViewModel
 @*@model DMP.ModelsView.TargetViewModel*@
+@using DMP.ModelsView
 @using DMP.Utils
 @{
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style type="text/css">
-    .label1
-    {
+    .label1 {
         text-align: left !important;
         width: 15% !important;
         font-size: 12px;
         font-weight: bold;
     }
-    .label2
-    {
+
+    .label2 {
         text-align: left !important;
         width: 18% !important;
         font-size: 12px;
     }
-    .label3
-    {
+
+    .label3 {
         text-align: left !important;
         width: 17% !important;
         font-size: 12px;
     }
-    .tempTbl td
-    {
+
+    .tempTbl td {
         padding: 3px !important;
     }
-    .label4
-    {
+
+    .label4 {
         text-align: left !important;
         font-size: 12px;
     }
-    .label5
-    {
+
+    .label5 {
         background-color: #DDDDDD;
         text-align: center !important;
         font-size: 20px;
@@ -43,14 +43,14 @@
         color: #205c9c;
         vertical-align: middle !important;
     }
-    .test td
-    {
+
+    .test td {
         padding: 3px !important;
         font-size: 12px !important;
         text-align: center !important;
     }
-    .test th
-    {
+
+    .test th {
         font-size: 14px !important;
     }
 </style>
@@ -70,107 +70,88 @@
                             @Model.Manpower.Name - @Model.Manpower.SAPId
                         </th>
                         <th class="head1">
-                            <a href="#" id="linkEdit" style="float: right" class="edit" title="click here to edit profile">
-                            </a>
+                            <a href="#" id="linkEdit" style="float: right" class="edit" title="click here to edit profile"></a>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="label1">
-                            Address
+                        <td class="label1">Address
                         </td>
                         <td colspan="5" class="label4">@Model.Manpower.Address
                         </td>
                     </tr>
                     <tr>
-                        <td class="label1">
-                            Phone
+                        <td class="label1">Phone
                         </td>
                         <td class="label2">@Model.Manpower.ContactNumber
                         </td>
-                        <td class="label1">
-                            Email
+                        <td class="label1">Email
                         </td>
                         <td class="label2">@Model.Manpower.Email
                         </td>
-                        <td class="label1">
-                            PAN
+                        <td class="label1">PAN
                         </td>
                         <td class="label3">@Model.Manpower.PANNumber
                         </td>
                     </tr>
                     <tr>
-                        <td class="label1">
-                            Date of Birth
+                        <td class="label1">Date of Birth
                         </td>
                         <td class="label2">@Model.Manpower.DOBString
                         </td>
-                        <td class="label1">
-                            Date of Joining
+                        <td class="label1">Date of Joining
                         </td>
                         <td class="label2">@Model.Manpower.DateOfJoining
                         </td>
-                        <td class="label1">
-                            @* Date of Leaving*@
+                        <td class="label1">@* Date of Leaving*@
                         </td>
-                        <td class="label3">
-                        </td>
+                        <td class="label3"></td>
                     </tr>
                     <tr>
-                        <td class="label1">
-                            Designation
+                        <td class="label1">Designation
                         </td>
                         <td class="label2">@Model.Manpower.Designation
                         </td>
-                        <td class="label1">
-                            Segment Serving
+                        <td class="label1">Segment Serving
                         </td>
                         <td class="label2">@Model.Manpower.Product
                         </td>
-                        <td class="label1">
-                            Tiv Representing
+                        <td class="label1">Tiv Representing
                         </td>
                         <td class="label3">@Model.Manpower.TIVRepresenting
                         </td>
                     </tr>
                     <tr>
-                        <td class="label1">
-                            Total Work Experience
+                        <td class="label1">Total Work Experience
                         </td>
                         <td class="label2">@Model.Manpower.TotalWorkExperience
                         </td>
-                        <td class="label1">
-                            Experience With Eicher
+                        <td class="label1">Experience With Eicher
                         </td>
                         <td class="label2">@Model.Manpower.ExperienceWithVE
                         </td>
-                        <td class="label1">
-                            Area Representing
+                        <td class="label1">Area Representing
                         </td>
                         <td class="label3">@Model.Manpower.AreaRepresenting
                         </td>
                     </tr>
                     <tr>
-                        <td class="label1">
-                            Previous Company
+                        <td class="label1">Previous Company
                         </td>
                         <td class="label2">@Model.Manpower.PreviousCompany
                         </td>
-                        <td class="label1">
-                            Previous Job profile
+                        <td class="label1">Previous Job profile
                         </td>
                         <td class="label2">@Model.Manpower.PreviousJobProfile
                         </td>
-                        <td class="label1">
-                            DDC Training
+                        <td class="label1">DDC Training
                         </td>
                         <td class="label3">@Model.Manpower.TrainingLevel
                         </td>
                     </tr>
                     <tr>
-                        <td class="label1">
-                            Salary
+                        <td class="label1">Salary
                         </td>
                         <td colspan="5" class="label4">@Model.Manpower.Salary
                         </td>
@@ -180,27 +161,23 @@
             <table class="table table-bordered test">
                 <thead>
                     <tr>
-                        <th colspan="4" class="head1">
-                            Other Trainings
+                        <th colspan="4" class="head1">Other Trainings
                         </th>
                     </tr>
                     <tr>
-                        <th class="head2">
-                            Training
+                        <th class="head2">Training
                         </th>
-                        <th class="head2">
-                            Total Trainings
+                        <th class="head2">Total Trainings
                         </th>
-                        <th class="head2">
-                            Last Attended
+                        <th class="head2">Last Attended
                         </th>
-                        <th class="head2">
-                            Days
+                        <th class="head2">Days
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var training in Model.Trainings) {
+                    @foreach (var training in Model.Trainings)
+                    {
                         <tr>
                             <td>@training.Training
                             </td>
@@ -220,8 +197,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th class="head1">
-                                Competency
+                            <th class="head1">Competency
                             </th>
                         </tr>
                         <tr>
@@ -235,8 +211,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th class="head1">
-                                Productivity
+                            <th class="head1">Productivity
                             </th>
                         </tr>
                         <tr>
@@ -248,7 +223,8 @@
                 </table>
             </div>
             <div class="span12">
-                @Html.Action("MonthWisePlanAndActual", "Reporting")
+                @Html.Action("MonthWisePlanAndActual", "Reporting",new{targets=Model.ProductMonthsTagets})
+                
             </div>
         </div>
     </div>
@@ -258,47 +234,53 @@
         <table class="table table-bordered test">
             <thead>
                 <tr>
-                    <th class="head1" colspan="14">
-                        Month Wise Target Vs Actual
+                    <th class="head1" colspan="14">Month Wise Target Vs Actual
                     </th>
                 </tr>
                 <tr>
-                    <th class="head2">
-                    </th>
-                    @foreach (var month in Model.Months) {
+                    <th class="head2"></th>
+                    @foreach (var month in Model.Months)
+                    {
                         <th class="head2">
                             @month
                         </th>
                     }
-                    <th class="head2">
-                        YTD
+                    <th class="head2">YTD
                     </th>
                 </tr>
                 <tr>
-                    <th class="head3">
-                        Product
+                    <th class="head3">Product
                     </th>
-                    @foreach (var month in Model.Months) {
-                        <th class="head3">
-                            T1 | T2 | Act
+                    @foreach (var month in Model.Months)
+                    {
+                        <th class="head3">T1 | T2 | Act
                         </th>
                     }
-                    <th class="head3">
-                        T1 | T2 | Act
+                    <th class="head3">T1 | T2 | Act
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach(var varient in Model.Varients)
-                 {
+                @foreach (var varient in Model.Varients)
+                {
                     <tr>
                         <td>
                             @varient
                         </td>
-                        @for (var j = 0; j < 13; j++) {
+                        @foreach (var month in Model.Months)
+                        {
+                            var target = Model.ProductMonthsTagets.SingleOrDefault(x => x.Month == month && x.ProductVariant == varient);
+                            if (target != null)
+                            {
                             <td>
-                                0 | 0 | 0
+                                @target.T1 | @target.T2 | @target.Actual
                             </td>
+                            }
+                            else
+                            {
+                            <td>0 | 0 | 0
+                            </td>
+                            }
                         }
                     </tr>
                 }
