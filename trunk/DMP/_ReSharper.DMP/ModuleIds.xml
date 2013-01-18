@@ -1,6 +1,0 @@
-<Modules>
-  <Module PersistentId="A739A985-50CE-4C1E-8CDC-916287606CD6" ModuleId="DMP.IOC" />
-  <Module PersistentId="CBF6964C-1985-4E1C-B1BF-DBF70F514C7B" ModuleId="DMP.Repository" />
-  <Module PersistentId="039322AC-367F-471F-8988-E9191BAAC102" ModuleId="DMP.Services" />
-  <Module PersistentId="0288972E-08A3-4422-AB49-7CF561EF5CE6" ModuleId="DMP" />
-</Modules>

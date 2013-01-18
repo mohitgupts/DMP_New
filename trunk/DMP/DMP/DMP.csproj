@@ -41,6 +41,10 @@
     <Reference Include="EPPlus">
       <HintPath>..\packages\EPPlus.3.1.2\lib\net35\EPPlus.dll</HintPath>
     </Reference>
+    <Reference Include="GAS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\GAS.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
@@ -206,6 +210,7 @@
     <Compile Include="ModelsView\TrainingProfileViewModel.cs" />
     <Compile Include="ModelsView\UserViewModel.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\BarTargetModel.cs" />
     <Compile Include="Models\BreadcrumbModel.cs" />
     <Compile Include="Models\DealerManpowerModel.cs" />
     <Compile Include="Models\FileUploadModel.cs" />
@@ -369,6 +374,7 @@
     <Content Include="Images\user_manage.png" />
     <Content Include="Images\volvo-logo.png" />
     <Content Include="Images\volvo-logo1.png" />
+    <Content Include="lib\GAS.dll" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
